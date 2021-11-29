@@ -1,0 +1,6 @@
+{
+    "/apis/create-books": "/apis/CreateBooks.js?needsToken=false&addsToken=sub:access",
+    "/apis/edit-books": "/apis/EditBooks.js?needsToken=false&addsToken=sub:access",
+    "/apis/delete-books": "/apis/DeleteBooks.js?needsToken=false&addsToken=sub:access",
+    "/apis/list-books": "/apis/ListBooks.js?needsToken=false&addsToken=sub:access"
+}
