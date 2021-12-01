@@ -1,15 +1,23 @@
-<div id="list-books-table">
-  <div id="row">
-     <div id="cell">Book Title</div>
-    <div id="cell">Book Price</div>
-    <div id="cell">ISBN</div>
-  </div>
-
-  {{#books}}
-  <div id="row">
-    <div id="cell">{{bookTitle}}</div>
-    <div id="cell">{{price}}</div>
-    <div id="cell">{{isbn}}</div>
-  </div>
-  {{/books}}
-</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Book Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#books}}
+    <tr>
+      <td>{{bookTitle}}</td>
+      <td>{{price}}</td>
+      <td>{{isbn}}</td>
+      <td>
+        <button type="button" class="btn btn-primary" data-book-id={{_id}}>Edit</button>
+        <button type="button" class="btn btn-danger" data-book-id={{_id}}>Delete</button>
+      </td>
+    </tr>
+    {{/books}}
+  </tbody>
+</table>
