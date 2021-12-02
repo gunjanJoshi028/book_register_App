@@ -11,10 +11,10 @@ exports.doService = async jsonReq => {
     // Validate API request and check mandatory payload required  
     if (!validateRequest(jsonReq)) return API_CONSTANTS.API_INSUFFICIENT_PARAMS;
     try {
-        const response = { "result": false, "booksCreated": [], "booksExisted": [] }
+        const response = { "result": false }
         const createdBooks = await createBooks(jsonReq);
         if (!createdBooks) return response;
-        return { ...response, ...{ result: true }, ...createdBooks };
+        return { ...response, ...{ result: true } };
     } catch (error) {
         console.error(error);
         return API_CONSTANTS.API_RESPONSE_SERVER_ERROR;
@@ -24,9 +24,8 @@ const createBooks = async (jsonReq) => {
     try {
         if (jsonReq.books) {
             const connection = await db.getMongoDbConnection();
-            const book=await connection.insertMany(jsonReq.books);
+            const book = await connection.insertMany(jsonReq.books);
             if (book) return true;
-            return false;
         }
         return false;
     } catch (error) {

@@ -11,10 +11,10 @@ exports.doService = async jsonReq => {
     // Validate API request and check mandatory payload required  
     if (!validateRequest(jsonReq)) return API_CONSTANTS.API_INSUFFICIENT_PARAMS;
     try {
-        const response = { "result": false, "Books": [] }
+        const response = { "result": false }
         const deletedBooks = await deleteBooks(jsonReq);
         if (!deletedBooks) return response;
-        return { ...response, ...{ result: true }, ...deletedBooks };
+        return { ...response, ...{ result: true } };
     } catch (error) {
         console.error(error);
         return API_CONSTANTS.API_RESPONSE_SERVER_ERROR;
@@ -24,8 +24,8 @@ const deleteBooks = async (jsonReq) => {
     try {
         if (jsonReq.books) {
             const connection = await db.getMongoDbConnection();
-            const delBooks = await connection.deleteMany(jsonReq.books);
-            if (delBooks) return true;
+            const deletedBooks = connection.deleteOne({ _id: jsonReq.books });
+            if (deletedBooks) return true;
             return false;
         }
         return false;

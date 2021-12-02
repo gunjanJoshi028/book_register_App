@@ -9,11 +9,14 @@ import { APP_CONSTANTS } from "../../js/constants.mjs";
 
 const createBook = async () => {
     const payloads = {
-        "bookTitle": create_book.shadowRoot.querySelector("#bookTitle").value,
-        "price": create_book.shadowRoot.querySelector("#price").value,
-        "isbn": create_book.shadowRoot.querySelector("#isbn").value
-    }
-    if(payloads.bookTitle) {
+        "books": [{
+            "bookTitle": create_book.shadowRoot.querySelector("#bookTitle").value,
+            "price": create_book.shadowRoot.querySelector("#price").value,
+            "isbn": create_book.shadowRoot.querySelector("#isbn").value
+        }]
+    };
+
+    if (payloads.books) {
         let resp = await apiman.rest(APP_CONSTANTS.API_CREATEBOOK, "POST", payloads, false, true);
         if (!resp || !resp.result) router.reload();
     }
