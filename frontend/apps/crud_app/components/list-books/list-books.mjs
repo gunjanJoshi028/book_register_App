@@ -17,7 +17,7 @@ const listBooks = async () => {
 
 const deleteBooks = async (id) => {
     const payloads = {
-        "books": id
+        "id": id 
     }
     let resp = await apiman.rest(APP_CONSTANTS.API_DELETEBOOKS, "POST", payloads, false, true);
     if (!resp || !resp.result) router.reload();
@@ -28,6 +28,7 @@ const deleteBooks = async (id) => {
 function register() {
     // convert this all into a WebComponent so we can use it
     monkshu_component.register("list-books", `${APP_CONSTANTS.APP_PATH}/components/list-books/list-books.html`, list_books);
+    list_books.listBooks();
 }
 
 const trueWebComponentMode = false;	// making this false renders the component without using Shadow DOM
