@@ -1,9 +1,10 @@
 const { MongoClient } = require(`${CONSTANTS.APPROOTDIR}/crud_app/3p/node_modules/mongodb`);
+const ObjectID = require(`${CONSTANTS.APPROOTDIR}/crud_app/3p/node_modules/mongodb`).ObjectID;
 const url = 'mongodb+srv://root:root@cluster0.4dsld.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const client = new MongoClient(url);
 const dbName = 'booksdb';
 
-const getMongoDbConnection = async () => {
+const getMongoDbCollection = async () => {
     try {
         // Use connect method to connect to the server
         await client.connect();
@@ -18,5 +19,6 @@ const getMongoDbConnection = async () => {
 }
 
 module.exports = {
-    getMongoDbConnection
+    ObjectID,
+    getMongoDbCollection
 }
