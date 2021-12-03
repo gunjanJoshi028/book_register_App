@@ -22,15 +22,12 @@ exports.doService = async jsonReq => {
 }
 const deleteBooks = async (jsonReq) => {
     try {
-        if (jsonReq.books) {
-            const connection = await db.getMongoDbConnection();
-            const deletedBooks = connection.deleteOne({ _id: jsonReq.books });
-            if (deletedBooks) return true;
-            return false;
-        }
+        const collection = await db.getMongoDbCollection();
+        const deletedBooks = collection.deleteOne({ "_id": db.ObjectID(jsonReq.id) });
+        if (deletedBooks) return true;
         return false;
     } catch (error) {
         throw error;
     }
 }
-const validateRequest = jsonReq => (jsonReq && jsonReq.books);
+const validateRequest = jsonReq => (jsonReq && jsonReq.id);
