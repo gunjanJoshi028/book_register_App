@@ -22,7 +22,7 @@ exports.doService = async jsonReq => {
 }
 const getBooks = async (jsonReq) => {
     try {
-        const connection = await db.getMongoDbConnection();
+        const connection = await db.getMongoDbCollection();
         const books = await connection.find({}).toArray();
         if (books) return books;
         return false;

@@ -23,7 +23,7 @@ exports.doService = async jsonReq => {
 const createBooks = async (jsonReq) => {
     try {
         if (jsonReq.books) {
-            const connection = await db.getMongoDbConnection();
+            const connection = await db.getMongoDbCollection();
             const book = await connection.insertMany(jsonReq.books);
             if (book) return true;
         }
