@@ -5,7 +5,6 @@
 import { monkshu_component } from "/framework/js/monkshu_component.mjs";
 
 const loadCreateBooksPage = () => document.querySelector("#content").innerHTML = "<create-book></create-book>";
-const loadListBooksPage = () => document.querySelector("#content").innerHTML = "<list-books></list-books>";
 
 //call all other apis API_CREATEBOOKS
 function register() {
@@ -15,4 +14,4 @@ function register() {
 
 const trueWebComponentMode = false;	// making this false renders the component without using Shadow DOM
 
-export const nav_menu = { trueWebComponentMode, register, loadCreateBooksPage, loadListBooksPage}
+export const nav_menu = { trueWebComponentMode, register, loadCreateBooksPage }
