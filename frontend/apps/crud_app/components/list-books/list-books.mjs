@@ -3,6 +3,7 @@
  * License: MIT - see enclosed license.txt file.
  */
 import { router } from "/framework/js/router.mjs";
+import {session} from "/framework/js/session.mjs";
 import { monkshu_component } from "/framework/js/monkshu_component.mjs";
 import { apimanager as apiman } from "/framework/js/apimanager.mjs";
 import { APP_CONSTANTS } from "../../js/constants.mjs";
@@ -14,10 +15,15 @@ const listBooks = async () => {
     list_books.bindData(resp);
 }
 
+const loadEditBookPage = (id) => {
+    session.set('bookId', id);
+    window.monkshu_env.components["edit-book"].loadBook();
+    document.querySelector("#content").innerHTML = `<edit-book></edit-book>`;
+}
 
 const deleteBooks = async (id) => {
     const payloads = {
-        "id": id 
+        "id": id
     }
     let resp = await apiman.rest(APP_CONSTANTS.API_DELETEBOOKS, "POST", payloads, false, true);
     if (!resp || !resp.result) router.reload();
@@ -33,4 +39,4 @@ function register() {
 
 const trueWebComponentMode = false;	// making this false renders the component without using Shadow DOM
 
-export const list_books = { trueWebComponentMode, register, listBooks, deleteBooks }
+export const list_books = { trueWebComponentMode, register, listBooks, deleteBooks, loadEditBookPage }
