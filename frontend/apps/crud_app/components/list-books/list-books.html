@@ -14,7 +14,7 @@
       <td>{{price}}</td>
       <td>{{isbn}}</td>
       <td>
-        <button type="button" class="btn btn-primary" onclick='monkshu_env.components["list-books"].updateBooks("{{_id}}")'>Edit</button>
+        <button type="button" class="btn btn-primary" onclick='monkshu_env.components["list-books"].loadEditBookPage("{{_id}}")'>Edit</button>
         <button type="button" class="btn btn-danger" onclick='monkshu_env.components["list-books"].deleteBooks("{{_id}}")'>Delete</button>
       </td>
     </tr>
