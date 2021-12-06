@@ -11,26 +11,24 @@ exports.doService = async jsonReq => {
     // Validate API request and check mandatory payload required  
     if (!validateRequest(jsonReq)) return API_CONSTANTS.API_INSUFFICIENT_PARAMS;
     try {
-        const response = { "result": false, "booksEdited": [] }
+        const response = { "result": false }
         const editBook = await editBooks(jsonReq);
         if (!editBook) return response;
-        return { ...response, ...{ result: true }, ...editBook };
+        return { ...response, ...{ result: true } };
     } catch (error) {
         console.error(error);
         return API_CONSTANTS.API_RESPONSE_SERVER_ERROR;
     }
 }
-const editBooks= async (jsonReq) => {
+const editBooks = async (jsonReq) => {
     try {
-        if (jsonReq.books) {
-            const connection = await db.getMongoDbConnection();
-            const updateBook=await connection.update(jsonReq.books);
-            if (updateBook) return true;
-            return false;
-        }
+        const collection = await db.getMongoDbCollection();
+        const { id, ...bookObject} = jsonReq;
+        const updateBook=await collection.updateOne({ "_id": db.ObjectID(jsonReq.id) }, bookObject);
+        if (updateBook) return true;
         return false;
     } catch (error) {
         throw error;
     }
 }
-const validateRequest = jsonReq => (jsonReq && jsonReq.books);
+const validateRequest = jsonReq => (jsonReq);
