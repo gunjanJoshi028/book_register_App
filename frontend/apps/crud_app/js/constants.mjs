@@ -17,6 +17,7 @@ export const APP_CONSTANTS = {
     API_CREATEBOOK: `${BACKEND}/apis/create-book`,
     API_DELETEBOOKS: `${BACKEND}/apis/delete-books`,
     API_EDITBOOKS: `${BACKEND}/apis/edit-books`,
+    API_GETBOOK: `${BACKEND}/apis/get-book`,
 
     USERID: "id",
     USER_ROLE: "user",
